@@ -170,39 +170,38 @@ Se encontrar problemas durante o deploy, verifique:
    ```
 3. **Assets não encontrados**: Certifique-se de que a configuração de assets no `angular.json` está correta
 
-### Correção para Erro 404 na Vercel
+### Correção para Erro 404 na Vercel com Angular 19
 
-Se você estiver encontrando erros 404 após o deploy, siga estas etapas:
+Se você estiver enfrentando erros 404 com uma aplicação Angular 19 na Vercel, siga estas etapas:
 
-1. **Verifique a configuração do `vercel.json`**:
-   ```json
-   {
-     "rewrites": [
-       {
-         "source": "/(.*)",
-         "destination": "/"
-       }
-     ],
-     "buildCommand": "npm run vercel-build",
-     "outputDirectory": "dist/countries-app/browser"
-   }
-   ```
-
-2. **Atualize o `angular.json`** para especificar o caminho de saída correto:
+1. **Modifique o builder no `angular.json` para usar o builder clássico** em vez do novo builder de aplicação:
    ```json
    "build": {
-     "builder": "@angular-devkit/build-angular:application",
+     "builder": "@angular-devkit/build-angular:browser",
      "options": {
-       "outputPath": "dist/countries-app/browser",
+       "outputPath": "dist/countries-app",
+       "index": "src/index.html",
+       "main": "src/main.ts",
        // ...
      }
    }
    ```
 
-3. **Modifique o script de build no `package.json`**:
+2. **Atualize o `vercel.json` para usar a configuração de rewrite simples**:
+   ```json
+   {
+     "rewrites": [
+       { "source": "/(.*)", "destination": "/index.html" }
+     ],
+     "buildCommand": "npm run vercel-build",
+     "outputDirectory": "dist/countries-app"
+   }
+   ```
+
+3. **Modifique o script de build no `package.json` para desativar SSR**:
    ```json
    "scripts": {
-     "vercel-build": "ng build --configuration production --aot"
+     "vercel-build": "ng build --configuration production --no-ssr"
    }
    ```
 
@@ -210,3 +209,5 @@ Se você estiver encontrando erros 404 após o deploy, siga estas etapas:
    ```bash
    vercel --prod
    ```
+
+A chave para resolver o problema é usar o builder clássico (browser) em vez do novo builder (application) do Angular 19, que tem características de Server-Side Rendering que podem causar problemas na Vercel.
