@@ -117,10 +117,13 @@ A Vercel é uma plataforma excelente para hospedar aplicações Angular. Siga os
    ```json
    {
      "rewrites": [
-       { "source": "/(.*)", "destination": "/index.html" }
+       {
+         "source": "/(.*)",
+         "destination": "/"
+       }
      ],
      "buildCommand": "npm run vercel-build",
-     "outputDirectory": "dist/countries-app"
+     "outputDirectory": "dist/countries-app/browser"
    }
    ```
 
@@ -158,8 +161,52 @@ Se encontrar problemas durante o deploy, verifique:
    // Formato correto para Angular
    {
      "rewrites": [
-       { "source": "/(.*)", "destination": "/index.html" }
+       {
+         "source": "/(.*)",
+         "destination": "/"
+       }
      ]
    }
    ```
 3. **Assets não encontrados**: Certifique-se de que a configuração de assets no `angular.json` está correta
+
+### Correção para Erro 404 na Vercel
+
+Se você estiver encontrando erros 404 após o deploy, siga estas etapas:
+
+1. **Verifique a configuração do `vercel.json`**:
+   ```json
+   {
+     "rewrites": [
+       {
+         "source": "/(.*)",
+         "destination": "/"
+       }
+     ],
+     "buildCommand": "npm run vercel-build",
+     "outputDirectory": "dist/countries-app/browser"
+   }
+   ```
+
+2. **Atualize o `angular.json`** para especificar o caminho de saída correto:
+   ```json
+   "build": {
+     "builder": "@angular-devkit/build-angular:application",
+     "options": {
+       "outputPath": "dist/countries-app/browser",
+       // ...
+     }
+   }
+   ```
+
+3. **Modifique o script de build no `package.json`**:
+   ```json
+   "scripts": {
+     "vercel-build": "ng build --configuration production --aot"
+   }
+   ```
+
+4. **Após as alterações**, faça um novo deploy:
+   ```bash
+   vercel --prod
+   ```

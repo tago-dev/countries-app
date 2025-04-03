@@ -39,7 +39,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/countries-app",
+            "outputPath": "dist/countries-app/browser",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [

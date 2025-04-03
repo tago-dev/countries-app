@@ -2,9 +2,9 @@
     "rewrites": [
         {
             "source": "/(.*)",
-            "destination": "/index.html"
+            "destination": "/"
         }
     ],
     "buildCommand": "npm run vercel-build",
-    "outputDirectory": "dist/countries-app"
+    "outputDirectory": "dist/countries-app/browser"
 }
