@@ -116,13 +116,11 @@ A Vercel é uma plataforma excelente para hospedar aplicações Angular. Siga os
 2. Confirme que o arquivo `vercel.json` contém as configurações corretas:
    ```json
    {
-     "routes": [
-       { "handle": "filesystem" },
-       { "src": "/.*", "dest": "/index.html" }
+     "rewrites": [
+       { "source": "/(.*)", "destination": "/index.html" }
      ],
      "buildCommand": "npm run vercel-build",
-     "outputDirectory": "dist/countries-app",
-     "framework": "angular"
+     "outputDirectory": "dist/countries-app"
    }
    ```
 
@@ -149,3 +147,19 @@ A Vercel é uma plataforma excelente para hospedar aplicações Angular. Siga os
 ---
 
 Este projeto foi desenvolvido como parte de um desafio técnico para demonstrar habilidades em desenvolvimento front-end com Angular.
+
+### Solução de Problemas Comuns
+
+Se encontrar problemas durante o deploy, verifique:
+
+1. **Erro de Build**: Confira os logs para identificar o problema específico
+2. **Erro 404 em Rotas**: Se você receber um erro 404 ao acessar a aplicação ou suas rotas, verifique se o arquivo vercel.json está usando "rewrites" em vez de "routes". Este é um problema comum com aplicações Angular na Vercel.
+   ```json
+   // Formato correto para Angular
+   {
+     "rewrites": [
+       { "source": "/(.*)", "destination": "/index.html" }
+     ]
+   }
+   ```
+3. **Assets não encontrados**: Certifique-se de que a configuração de assets no `angular.json` está correta

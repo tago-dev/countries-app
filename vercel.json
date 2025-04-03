@@ -1,20 +1,10 @@
 {
-    "routes": [
+    "rewrites": [
         {
-            "handle": "filesystem"
-        },
-        {
-            "src": "/.*",
-            "dest": "/index.html"
-        }
-    ],
-    "builds": [
-        {
-            "src": "package.json",
-            "use": "@vercel/node"
+            "source": "/(.*)",
+            "destination": "/index.html"
         }
     ],
     "buildCommand": "npm run vercel-build",
-    "outputDirectory": "dist/countries-app",
-    "framework": "angular"
+    "outputDirectory": "dist/countries-app"
 }
