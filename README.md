@@ -198,10 +198,10 @@ Se você estiver enfrentando erros 404 com uma aplicação Angular 19 na Vercel,
    }
    ```
 
-3. **Modifique o script de build no `package.json` para desativar SSR**:
+3. **Use um script de build simples no `package.json`**:
    ```json
    "scripts": {
-     "vercel-build": "ng build --configuration production --no-ssr"
+     "vercel-build": "ng build --configuration production"
    }
    ```
 
@@ -210,4 +210,4 @@ Se você estiver enfrentando erros 404 com uma aplicação Angular 19 na Vercel,
    vercel --prod
    ```
 
-A chave para resolver o problema é usar o builder clássico (browser) em vez do novo builder (application) do Angular 19, que tem características de Server-Side Rendering que podem causar problemas na Vercel.
+A chave para resolver o problema é usar o builder clássico (browser) em vez do novo builder (application) do Angular 19, evitando as características de Server-Side Rendering que podem causar problemas na Vercel.
