@@ -6,16 +6,14 @@
   
   <div class="search-container">
     <div class="search-input-wrapper">
-      <span class="p-input-icon-left">
-        <i class="pi pi-search"></i>
-        <input 
-          type="text" 
-          pInputText 
-          placeholder="Buscar por país..."
-          [(ngModel)]="searchTerm"
-          (input)="onSearchInput()"
-        />
-      </span>
+      <input 
+        type="text" 
+        pInputText 
+        placeholder="Buscar por país..."
+        [(ngModel)]="searchTerm"
+        (input)="onSearchInput()"
+        class="search-input"
+      />
       <button 
         pButton 
         class="search-button" 
