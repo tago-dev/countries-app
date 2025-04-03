@@ -1,0 +1,119 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.loading-container,
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.back-button {
+  margin-bottom: 20px;
+}
+
+.country-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  text-align: center;
+  
+  h1 {
+    color: #3f51b5;
+    margin: 15px 0 5px;
+  }
+  
+  h2 {
+    color: #666;
+    font-weight: normal;
+    font-style: italic;
+    margin: 0 0 20px;
+    font-size: 1.1rem;
+  }
+}
+
+.country-flag {
+  max-width: 300px;
+  max-height: 200px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -0.5rem;
+}
+
+.col-12 {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .md\:col-6 {
+    width: 50%;
+  }
+}
+
+.info-row {
+  display: flex;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.info-label {
+  font-weight: bold;
+  width: 120px;
+  color: #3f51b5;
+}
+
+.info-value {
+  flex: 1;
+}
+
+.map-link {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+:host ::ng-deep {
+  .p-card {
+    margin-bottom: 1rem;
+    
+    .p-card-header {
+      background-color: #f8f9fa;
+      padding: 1rem;
+      font-weight: 600;
+    }
+    
+    .p-card-content {
+      padding: 1rem;
+    }
+  }
+  
+  .p-panel {
+    .p-panel-header {
+      background-color: #f8f9fa;
+      padding: 1rem;
+      font-weight: 600;
+    }
+    
+    .p-panel-content {
+      padding: 1rem;
+    }
+  }
+} 

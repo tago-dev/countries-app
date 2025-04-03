@@ -1,0 +1,94 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  color: #3f51b5;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+  
+  .p-input-icon-left {
+    width: 300px;
+  }
+  
+  input {
+    width: 100%;
+  }
+}
+
+:host ::ng-deep {
+  .p-paginator {
+    .p-paginator-current {
+      margin-left: auto;
+    }
+  }
+  
+  .p-progressbar {
+    height: 0.5rem;
+    background-color: #d8dadc;
+    
+    .p-progressbar-value {
+      background-color: #607d8b;
+    }
+  }
+  
+  .p-datatable.p-datatable-gridlines {
+    .p-datatable-header {
+      background-color: #f8f9fa;
+      border: 1px solid #e9ecef;
+      padding: 1rem;
+      font-weight: 600;
+    }
+    
+    .p-paginator {
+      padding: 1rem;
+    }
+    
+    .p-datatable-thead > tr > th {
+      text-align: left;
+      padding: 1rem;
+      border: 1px solid #e9ecef;
+      background-color: #f8f9fa;
+      font-weight: 600;
+      color: #495057;
+      transition: box-shadow 0.2s;
+    }
+    
+    .p-datatable-tbody > tr {
+      background-color: #ffffff;
+      transition: 0.3s;
+      
+      &:hover {
+        background-color: #e9ecef;
+      }
+      
+      > td {
+        padding: 1rem;
+        border: 1px solid #e9ecef;
+      }
+    }
+    
+    .p-dropdown-label {
+      padding-right: 1rem;
+    }
+  }
+  
+  .p-datatable.p-datatable-gridlines:not(.p-datatable-gridlines-horizontal) {
+    .p-datatable-tbody > tr > td:last-child {
+      border-right: 1px solid #e9ecef;
+    }
+  }
+}
+
+.text-center {
+  text-align: center;
+} 

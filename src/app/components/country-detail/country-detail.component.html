@@ -1,0 +1,85 @@
+<div class="container">
+  <div *ngIf="loading" class="loading-container">
+    <p-progressSpinner></p-progressSpinner>
+    <p>Loading country information...</p>
+  </div>
+
+  <div *ngIf="!loading && errorMessage" class="error-container">
+    <p>{{ errorMessage }}</p>
+    <button pButton type="button" label="Back to Countries" icon="pi pi-arrow-left" (click)="goBack()"></button>
+  </div>
+
+  <div *ngIf="!loading && !errorMessage && country" class="country-details">
+    <div class="back-button">
+      <button pButton type="button" label="Back to Countries" icon="pi pi-arrow-left" (click)="goBack()"></button>
+    </div>
+
+    <div class="country-header">
+      <img [src]="country.flags.png" [alt]="country.flags.alt || country.name.common + ' flag'" class="country-flag" />
+      <h1>{{ country.name.common }}</h1>
+      <h2 *ngIf="country.name.official && country.name.official !== country.name.common">{{ country.name.official }}</h2>
+    </div>
+
+    <div class="grid">
+      <div class="col-12 md:col-6">
+        <p-card header="Basic Information">
+          <div class="info-row">
+            <span class="info-label">Region:</span>
+            <span class="info-value">{{ country.region }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Subregion:</span>
+            <span class="info-value">{{ country.subregion || 'N/A' }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Capital:</span>
+            <span class="info-value">{{ country.capital ? country.capital[0] : 'N/A' }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Population:</span>
+            <span class="info-value">{{ country.population | number }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Area:</span>
+            <span class="info-value">{{ country.area | number }} km²</span>
+          </div>
+        </p-card>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <p-card header="Additional Information">
+          <div class="info-row">
+            <span class="info-label">Languages:</span>
+            <span class="info-value">{{ getLanguages(country.languages) }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Currencies:</span>
+            <span class="info-value">{{ getCurrencies(country.currencies) }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Driving Side:</span>
+            <span class="info-value">{{ country.car?.side || 'N/A' }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Timezones:</span>
+            <span class="info-value">{{ country.timezones?.join(', ') || 'N/A' }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Independent:</span>
+            <span class="info-value">{{ country.independent ? 'Yes' : 'No' }}</span>
+          </div>
+        </p-card>
+      </div>
+
+      <div class="col-12" *ngIf="country.maps?.googleMaps">
+        <p-panel header="Map Location">
+          <div class="map-link">
+            <a [href]="country.maps.googleMaps" target="_blank" rel="noopener noreferrer">
+              <button pButton type="button" label="View on Google Maps" icon="pi pi-map-marker"></button>
+            </a>
+          </div>
+        </p-panel>
+      </div>
+    </div>
+  </div>
+</div> 

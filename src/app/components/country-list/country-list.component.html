@@ -1,0 +1,75 @@
+<div class="container">
+  <h1>Countries of the World</h1>
+  
+  <div class="search-container">
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input 
+        type="text" 
+        pInputText 
+        [(ngModel)]="searchTerm" 
+        placeholder="Search for a country..." 
+        (keyup.enter)="searchCountries()"
+      />
+    </span>
+    <button 
+      pButton 
+      type="button" 
+      label="Search" 
+      icon="pi pi-search" 
+      (click)="searchCountries()"
+    ></button>
+  </div>
+  
+  <p-table 
+    [value]="filteredCountries" 
+    [loading]="loading" 
+    [paginator]="true" 
+    [rows]="10" 
+    [showCurrentPageReport]="true" 
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
+    [rowsPerPageOptions]="[10,25,50]"
+    styleClass="p-datatable-gridlines"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Flag</th>
+        <th pSortableColumn="name.common">Name <p-sortIcon field="name.common"></p-sortIcon></th>
+        <th pSortableColumn="capital">Capital <p-sortIcon field="capital"></p-sortIcon></th>
+        <th pSortableColumn="population">Population <p-sortIcon field="population"></p-sortIcon></th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-country>
+      <tr>
+        <td>
+          <img 
+            [src]="country.flags.png" 
+            [alt]="country.flags.alt || country.name.common + ' flag'" 
+            style="width: 50px; height: auto;"
+          />
+        </td>
+        <td>{{ country.name.common }}</td>
+        <td>{{ country.capital ? country.capital[0] : 'N/A' }}</td>
+        <td>{{ country.population | number }}</td>
+        <td>
+          <button 
+            pButton 
+            type="button" 
+            label="Details" 
+            icon="pi pi-info-circle" 
+            (click)="viewCountryDetails(country.cca3)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="5" class="text-center">
+          <div *ngIf="loading">Loading countries...</div>
+          <div *ngIf="!loading">No countries found</div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div> 
