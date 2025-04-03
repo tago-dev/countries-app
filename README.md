@@ -99,6 +99,53 @@ Algumas melhorias que poderiam ser implementadas:
 - Mais opções de filtros e ordenação
 - Modo escuro
 
+## Deploy na Vercel
+
+A Vercel é uma plataforma excelente para hospedar aplicações Angular. Siga os passos abaixo para fazer o deploy:
+
+### Preparação para o Deploy
+
+1. Certifique-se de que o script de build esteja configurado para produção no `package.json`:
+   ```json
+   "scripts": {
+     "build": "ng build --configuration production",
+     "vercel-build": "ng build --configuration production"
+   }
+   ```
+
+2. Confirme que o arquivo `vercel.json` contém as configurações corretas:
+   ```json
+   {
+     "routes": [
+       { "handle": "filesystem" },
+       { "src": "/.*", "dest": "/index.html" }
+     ],
+     "buildCommand": "npm run vercel-build",
+     "outputDirectory": "dist/countries-app",
+     "framework": "angular"
+   }
+   ```
+
+3. Ajuste os budgets no `angular.json` para permitir arquivos de estilo maiores:
+   ```json
+   "budgets": [
+     {
+       "type": "initial",
+       "maximumWarning": "2MB",
+       "maximumError": "4MB"
+     },
+     {
+       "type": "anyComponentStyle",
+       "maximumWarning": "12kB",
+       "maximumError": "20kB"
+     }
+   ]
+   ```
+
+### Método 1: Deploy usando CLI da Vercel
+
+// ... resto do conteúdo ...
+
 ---
 
 Este projeto foi desenvolvido como parte de um desafio técnico para demonstrar habilidades em desenvolvimento front-end com Angular.

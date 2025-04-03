@@ -1,0 +1,20 @@
+{
+    "routes": [
+        {
+            "handle": "filesystem"
+        },
+        {
+            "src": "/.*",
+            "dest": "/index.html"
+        }
+    ],
+    "builds": [
+        {
+            "src": "package.json",
+            "use": "@vercel/node"
+        }
+    ],
+    "buildCommand": "npm run vercel-build",
+    "outputDirectory": "dist/countries-app",
+    "framework": "angular"
+}
