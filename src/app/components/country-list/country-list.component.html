@@ -1,75 +1,111 @@
 <div class="container">
-  <h1>Countries of the World</h1>
-  
-  <div class="search-container">
-    <span class="p-input-icon-left">
-      <i class="pi pi-search"></i>
-      <input 
-        type="text" 
-        pInputText 
-        [(ngModel)]="searchTerm" 
-        placeholder="Search for a country..." 
-        (keyup.enter)="searchCountries()"
-      />
-    </span>
-    <button 
-      pButton 
-      type="button" 
-      label="Search" 
-      icon="pi pi-search" 
-      (click)="searchCountries()"
-    ></button>
+  <div class="page-header">
+    <h1>Países do Mundo todo :D</h1>
+    <p class="subtitle">Descubra informações sobre países, suas culturas, geografia e muito mais</p>
   </div>
   
-  <p-table 
-    [value]="filteredCountries" 
-    [loading]="loading" 
-    [paginator]="true" 
-    [rows]="10" 
-    [showCurrentPageReport]="true" 
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
-    [rowsPerPageOptions]="[10,25,50]"
-    styleClass="p-datatable-gridlines"
-  >
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Flag</th>
-        <th pSortableColumn="name.common">Name <p-sortIcon field="name.common"></p-sortIcon></th>
-        <th pSortableColumn="capital">Capital <p-sortIcon field="capital"></p-sortIcon></th>
-        <th pSortableColumn="population">Population <p-sortIcon field="population"></p-sortIcon></th>
-        <th>Actions</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-country>
-      <tr>
-        <td>
-          <img 
-            [src]="country.flags.png" 
-            [alt]="country.flags.alt || country.name.common + ' flag'" 
-            style="width: 50px; height: auto;"
-          />
-        </td>
-        <td>{{ country.name.common }}</td>
-        <td>{{ country.capital ? country.capital[0] : 'N/A' }}</td>
-        <td>{{ country.population | number }}</td>
-        <td>
-          <button 
-            pButton 
-            type="button" 
-            label="Details" 
-            icon="pi pi-info-circle" 
-            (click)="viewCountryDetails(country.cca3)"
-          ></button>
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage">
-      <tr>
-        <td colspan="5" class="text-center">
-          <div *ngIf="loading">Loading countries...</div>
-          <div *ngIf="!loading">No countries found</div>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+  <div class="search-container">
+    <div class="search-input-wrapper">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input 
+          type="text" 
+          pInputText 
+          placeholder="Buscar por país..."
+          [(ngModel)]="searchTerm"
+          (input)="onSearchInput()"
+        />
+      </span>
+      <button 
+        pButton 
+        class="search-button" 
+        label="Buscar"
+        (click)="searchCountries()"
+      ></button>
+    </div>
+  </div>
+  
+  <div class="countries-content">
+    <div *ngIf="loading" class="loading-container">
+      <p-progressSpinner></p-progressSpinner>
+      <p>Carregando países...</p>
+    </div>
+
+    <div *ngIf="!loading && filteredCountries.length === 0" class="no-results">
+      <div class="no-results-content">
+        <i class="pi pi-search" style="font-size: 3rem; color: var(--text-light);"></i>
+        <h3>Nenhum país encontrado</h3>
+        <p>Tente ajustar sua busca ou verificar se há erros de digitação.</p>
+        <button pButton label="Limpar busca" class="p-button-outlined" (click)="searchTerm = ''; searchCountries()"></button>
+      </div>
+    </div>
+
+    <div *ngIf="!loading && filteredCountries.length > 0">
+      <div class="sorting-controls">
+        <p-dropdown 
+          [options]="sortOptions" 
+          [(ngModel)]="sortField" 
+          placeholder="Ordenar por" 
+          (onChange)="onSortChange($event)" 
+          styleClass="sort-dropdown"
+        ></p-dropdown>
+      </div>
+
+      <div class="countries-grid">
+        <div *ngFor="let country of displayedCountries" class="country-card-container">
+          <div class="country-card" (click)="viewCountryDetails(country.cca3)">
+            <div class="country-flag-container">
+              <img 
+                [src]="country.flags.png" 
+                [alt]="country.flags.alt || country.name.common + ' flag'" 
+                class="country-flag"
+              />
+            </div>
+            <div class="country-info">
+              <h3 class="country-name">{{ country.name.common }}</h3>
+              <div class="country-details">
+                <div class="country-detail">
+                  <i class="pi pi-map-marker"></i>
+                  <span>{{ country.region }}</span>
+                </div>
+                <div class="country-detail">
+                  <i class="pi pi-building"></i>
+                  <span>{{ country.capital ? country.capital[0] : 'N/A' }}</span>
+                </div>
+                <div class="country-detail">
+                  <i class="pi pi-users"></i>
+                  <span>{{ country.population | number }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="country-actions">
+              <button 
+                pButton 
+                type="button" 
+                label="Detalhes" 
+                icon="pi pi-info-circle"
+                class="p-button-sm p-button-rounded p-button-outlined"
+                (click)="$event.stopPropagation(); viewCountryDetails(country.cca3)"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="pagination-controls" *ngIf="filteredCountries.length > 0">
+      <p-paginator
+        [rows]="rows"
+        [totalRecords]="filteredCountries.length"
+        [first]="first"
+        [rowsPerPageOptions]="[12, 24, 36, 48]"
+        [showCurrentPageReport]="true"
+        [showPageLinks]="true"
+        [showJumpToPageDropdown]="true"
+        [alwaysShow]="true"
+        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} países"
+        (onPageChange)="onPageChange($event)"
+      ></p-paginator>
+    </div>
+  </div>
 </div> 

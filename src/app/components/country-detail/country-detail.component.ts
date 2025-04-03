@@ -6,6 +6,8 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { PanelModule } from 'primeng/panel';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TabViewModule } from 'primeng/tabview';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { catchError, of } from 'rxjs';
 
 @Component({
@@ -16,7 +18,8 @@ import { catchError, of } from 'rxjs';
         CardModule,
         ButtonModule,
         PanelModule,
-        ProgressSpinnerModule
+        ProgressSpinnerModule,
+        TabViewModule
     ],
     templateUrl: './country-detail.component.html',
     styleUrls: ['./country-detail.component.scss']
@@ -29,7 +32,8 @@ export class CountryDetailComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private countryService: CountryService
+        private countryService: CountryService,
+        private sanitizer: DomSanitizer
     ) { }
 
     ngOnInit(): void {
@@ -77,5 +81,15 @@ export class CountryDetailComponent implements OnInit {
         return Object.values(currencies)
             .map((currency: any) => `${currency.name} (${currency.symbol})`)
             .join(', ');
+    }
+
+    getGoogleMapsSrc(): SafeResourceUrl {
+        if (this.country && this.country.latlng && this.country.latlng.length >= 2) {
+            const lat = this.country.latlng[0];
+            const lng = this.country.latlng[1];
+            const mapUrl = `https://www.google.com/maps/embed/v1/view?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&center=${lat},${lng}&zoom=5`;
+            return this.sanitizer.bypassSecurityTrustResourceUrl(mapUrl);
+        }
+        return '';
     }
 } 

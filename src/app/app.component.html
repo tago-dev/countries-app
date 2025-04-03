@@ -169,12 +169,26 @@
 </style>
 
 <div class="app-container">
-  <p-toolbar styleClass="mb-4 gap-2">
-    <ng-template pTemplate="start">
-      <img src="https://restcountries.com/assets/img/logo.svg" height="40" class="mr-2">
-      <span class="app-title">{{ title }}</span>
-    </ng-template>
-  </p-toolbar>
+  <header class="app-header">
+    <p-toolbar styleClass="header-toolbar">
+      <ng-template pTemplate="start">
+        <div class="header-logo">
+          <img src="https://restcountries.com/assets/img/logo.svg" height="40" class="logo-image">
+          <span class="app-title">{{ title }}</span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="end">
+        <div class="header-actions">
+          <a href="https://restcountries.com/v3.1/all" target="_blank" pButton pRipple 
+             icon="pi pi-code" label="API" 
+             class="p-button-text p-button-rounded"></a>
+          <a href="https://github.com" target="_blank" pButton pRipple 
+             icon="pi pi-github" label="GitHub" 
+             class="p-button-text p-button-rounded"></a>
+        </div>
+      </ng-template>
+    </p-toolbar>
+  </header>
 
   <main class="main-content">
     <router-outlet></router-outlet>
@@ -182,19 +196,13 @@
 
   <footer class="app-footer">
     <div class="footer-content">
-      <p>Data provided by <a href="https://restcountries.com" target="_blank" rel="noopener noreferrer">REST Countries API</a></p>
-      <p>© 2024 Countries Explorer</p>
+      <div class="footer-info">
+        <p>Data provided by <a href="https://restcountries.com" target="_blank" rel="noopener noreferrer">REST Countries API</a></p>
+        <p>Developed with <i class="pi pi-heart-fill" style="color: #ff4081;"></i> using Angular and PrimeNG</p>
+      </div>
+      <div class="footer-copyright">
+        <p>© 2024 Countries Explorer</p>
+      </div>
     </div>
   </footer>
 </div>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-
-<router-outlet />
