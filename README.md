@@ -1,67 +1,104 @@
-# CountriesApp
+# Countries Explorer - Desafio Técnico
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.
+## Descrição do Projeto
 
-## Development server
+Este projeto foi desenvolvido como parte de um desafio técnico, consistindo em uma aplicação Angular que consome a API REST Countries para exibir informações sobre países de todo o mundo. A aplicação permite visualizar, pesquisar e obter detalhes sobre cada país.
 
-To start a local development server, run:
+## Tecnologias Utilizadas
 
+- **Angular**: Framework front-end para construção da interface
+- **PrimeNG**: Biblioteca de componentes UI para Angular
+- **PrimeFlex**: Biblioteca de utilidades CSS
+- **RxJS**: Biblioteca para programação reativa
+- **REST Countries API**: API pública para obtenção de dados dos países
+
+## Funcionalidades
+
+- **Listagem de Países**: Visualização de países em cards com bandeira e informações básicas
+- **Pesquisa**: Busca de países por nome, região ou capital
+- **Paginação**: Navegação entre páginas de resultados
+- **Detalhes do País**: Visualização de informações detalhadas sobre cada país
+- **Responsividade**: Layout adaptável para diferentes tamanhos de tela
+
+## Estrutura do Projeto
+
+A aplicação segue uma arquitetura de componentes organizada com:
+
+- **Componentes**: Elementos reutilizáveis da interface
+- **Serviços**: Lógica de negócio e comunicação com APIs
+- **Interfaces**: Tipagem de dados
+- **Estilos**: Customizações CSS/SCSS
+
+## Como Executar o Projeto
+
+### Pré-requisitos
+
+- Node.js (versão 14 ou superior)
+- NPM (normalmente instalado com o Node.js)
+- Angular CLI (instalado globalmente é recomendado)
+
+### Instalação
+
+1. Clone o repositório:
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
+   ```
+
+2. Navegue até a pasta do projeto:
+   ```bash
+   cd countries-app
+   ```
+
+3. Instale as dependências:
+   ```bash
+   npm install
+   ```
+
+### Execução
+
+Para iniciar o servidor de desenvolvimento:
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+Acesse a aplicação em seu navegador:
 ```
-ou
-```bash
-ng g c component-name
+http://localhost:4200
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+Para compilar o projeto para produção:
 ```bash
-ng generate --help
-```
-ou
-```bash
-ng g --help
+ng build --prod
 ```
 
-## Building
+## Abordagem de Desenvolvimento
 
-To build the project run:
+Este projeto foi desenvolvido seguindo as melhores práticas de Angular:
 
-```bash
-ng build
-```
+1. **Componentes Standalone**: Utilização do novo padrão de componentes independentes
+2. **Lazy Loading**: Carregamento sob demanda para melhor performance
+3. **RxJS**: Manipulação de dados assíncronos com Observables
+4. **Componentes PrimeNG**: Uso de biblioteca para agilizar o desenvolvimento da UI
+5. **CSS Customizável**: Uso de variáveis CSS para tema consistente
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Desafios e Soluções
 
-## Running unit tests
+Durante o desenvolvimento, alguns desafios foram superados:
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- **Performance na Pesquisa**: Implementação de debounce para evitar requisições desnecessárias
+- **Responsividade**: Adaptação do layout para diferentes dispositivos usando grid e media queries
+- **Estilização Consistente**: Criação de um tema unificado usando variáveis CSS
 
-```bash
-ng test
-```
+## Melhorias Futuras
 
-## Running end-to-end tests
+Algumas melhorias que poderiam ser implementadas:
 
-For end-to-end (e2e) testing, run:
+- Cache de dados para reduzir requisições à API
+- Testes unitários e de integração
+- Implementação de PWA para uso offline
+- Mais opções de filtros e ordenação
+- Modo escuro
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Este projeto foi desenvolvido como parte de um desafio técnico para demonstrar habilidades em desenvolvimento front-end com Angular.
