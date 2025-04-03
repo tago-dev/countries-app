@@ -39,16 +39,6 @@
     </div>
 
     <div *ngIf="!loading && filteredCountries.length > 0">
-      <div class="sorting-controls">
-        <p-dropdown 
-          [options]="sortOptions" 
-          [(ngModel)]="sortField" 
-          placeholder="Ordenar por" 
-          (onChange)="onSortChange($event)" 
-          styleClass="sort-dropdown"
-        ></p-dropdown>
-      </div>
-
       <div class="countries-grid">
         <div *ngFor="let country of displayedCountries" class="country-card-container">
           <div class="country-card" (click)="viewCountryDetails(country.cca3)">
